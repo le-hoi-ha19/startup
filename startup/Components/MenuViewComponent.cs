@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using startup.Models;
 
+// lấy dữ liệu từ cơ sở dữ liệu truyền qua cho File Default.cshtml ở thư mục shared/Components/MenuView
 namespace startup.Components
 {
     [ViewComponent(Name = "MenuView")]

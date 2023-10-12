@@ -1,4 +1,5 @@
 ﻿@using startup.Models;
+@using startup.Utilities;
 @model IList<Post>
 <!-- Blog Start -->
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -10,6 +11,7 @@
         <div class="row g-5">
             @foreach(var item in Model)
             {
+                string url = Functions.TitleSlugGeneration("post", item.Title, item.PostID);
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="blog-item bg-light rounded overflow-hidden">
                         <div class="blog-img position-relative overflow-hidden">
@@ -23,7 +25,7 @@
                             </div>
                             <h4 class="mb-3">@item.Title</h4>
                             <p>@item.Abstract</p>
-                            <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                            <a class="text-uppercase" href="/@url">Read More <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

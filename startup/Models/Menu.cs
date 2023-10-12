@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace startup.Models
 {
-    [Table("Menu")]
+    [Table("Menu")] // Ánh xạ với bảng Menu trong cơ sở dữ liệu
     public class Menu
     {
         [Key]

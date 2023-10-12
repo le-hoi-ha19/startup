@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace startup.Models
 {
-    [Table("Post")]
+    [Table("Post")] // Ánh xạ với bảng Post trong cơ sở dữ liệu
     public class Post
     {
         [Key]

@@ -1,0 +1,1 @@
+các file trong thư mục này có tác dụng tách nhỏ giao diện để tái sử dụng vào những chỗ cần thiết giống react
