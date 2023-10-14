@@ -21,7 +21,7 @@
                         <div class="p-4">
                             <div class="d-flex mb-3">
                                 <small class="me-3"><i class="far fa-user text-primary me-2"></i>@item.Author</small>
-                                <small><i class="far fa-calendar-alt text-primary me-2"></i>@item.CreatedDate.ToString()</small>
+                                <small><i class="far fa-calendar-alt text-primary me-2"></i>@item.CreatedDate.Value.ToString("dd/MM/yyy")</small>
                             </div>
                             <h4 class="mb-3">@item.Title</h4>
                             <p>@item.Abstract</p>

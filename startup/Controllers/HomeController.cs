@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using startup.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace startup.Controllers
 {
@@ -52,8 +55,31 @@ namespace startup.Controllers
             {
                 return NotFound();
             }
+            
+            
             // nếu có bài post thì chuyển dữ liệu bài post qua Views/Home/Details.cshtml
             return View(post);
+        }
+
+        // ví dụ của route naỳ: /list-slug-1.html
+        [Route("/list-{slug}-{id:int}.html", Name = "List")]
+        public IActionResult List(int? id)
+        {
+            // kiểm tra xem có id từ param truyền vào k
+            if (id == null)
+            {
+                return NotFound();
+            }
+            // tìm bài postMenus có id =id truyền vào từ param và IsActive = true
+            var list = _context.PostMenus.Where(m => (m.MenuID == id) && (m.IsActive == true)).Take(6).ToList();
+            // nếu không có bài post thì
+            if (list == null )
+            {
+                return NotFound();
+            }
+            
+            // nếu có bài post thì chuyển dữ liệu bài post qua Views/Home/List.cshtml
+            return View(list);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
