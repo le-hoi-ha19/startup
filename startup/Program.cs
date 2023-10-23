@@ -28,6 +28,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// cái này dùng cho admin
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+
+
 // định nghĩa 1 router bằng name
 // khi vào router đó thì dùng pattern: thì gọi controller cần gọi và phương thức cần dùng trong controller đó
 app.MapControllerRoute(
