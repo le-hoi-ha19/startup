@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using startup.Models;
 
 namespace startup.Areas.Admin.Controllers
@@ -16,6 +17,74 @@ namespace startup.Areas.Admin.Controllers
             var mnList = _context.Menus.OrderBy(m => m.MenuID).ToList();
             return View(mnList);
         }
+
+        public IActionResult Create()
+        {
+            var mnList = (from m in _context.Menus
+                          select new SelectListItem()
+                          {
+                              Text = m.MenuName,
+                              Value = m.MenuID.ToString(),
+                          }).ToList();
+            mnList.Insert(0, new SelectListItem()
+            {
+                Text = "----Select----",
+                Value = "0"
+            });
+            ViewBag.mnList = mnList;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Create(Menu mn)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Menus.Add(mn);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var mn = _context.Menus.Find(id);
+            if(mn == null)
+            {
+                return NotFound();
+            }
+            var mnList = (from m in _context.Menus
+                          select new SelectListItem()
+                          {
+                              Text = m.MenuName,
+                              Value = m.MenuID.ToString(),
+                          }).ToList();
+            mnList.Insert(0, new SelectListItem()
+            {
+                Text = "----Select----",
+                Value = string.Empty
+            });
+            ViewBag.mnList = mnList;
+            return View(mn);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Menu mn)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Menus.Update(mn);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(mn);
+        }
+
 
         public IActionResult Delete(int? id)
         {
