@@ -12,12 +12,15 @@ namespace startup.Areas.Admin.Controllers
         {
             _context = context;
         }
+
+        //lấy các danh sách menu từ database và truyền dữ liệu qua file index.cshtml của thư mục menu
         public IActionResult Index()
         {
             var mnList = _context.Menus.OrderBy(m => m.MenuID).ToList();
             return View(mnList);
         }
 
+        //Hiển thị Trang Thêm mới  menu
         public IActionResult Create()
         {
             var mnList = (from m in _context.Menus
@@ -34,11 +37,13 @@ namespace startup.Areas.Admin.Controllers
             ViewBag.mnList = mnList;
             return View();
         }
+        // xử lý dữ liệu khi người dùng gửi lên 1 request bằng phương thức post
         [HttpPost]
         [ValidateAntiForgeryToken]
 
         public IActionResult Create(Menu mn)
         {
+            //Validate dữ liệu xem dữ liệu nhập vào đúng k
             if (ModelState.IsValid)
             {
                 _context.Menus.Add(mn);
@@ -47,6 +52,8 @@ namespace startup.Areas.Admin.Controllers
             }
             return View();
         }
+
+        // Hiển thị trang chỉnh sửa 1 menu
         public IActionResult Edit(int? id)
         {
             if(id == null || id == 0)
@@ -86,6 +93,7 @@ namespace startup.Areas.Admin.Controllers
         }
 
 
+        // Hiển thị trang xóa 1 menu
         public IActionResult Delete(int? id)
         {
             if(id == null || id==0)
@@ -99,6 +107,7 @@ namespace startup.Areas.Admin.Controllers
             }
             return View(mn);
         }
+        // 
         [HttpPost]
         public IActionResult Delete(int id)
         {
