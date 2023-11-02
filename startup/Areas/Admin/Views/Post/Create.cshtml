@@ -9,12 +9,12 @@
     <div class="pagetitle">
         <h2>Thêm mới bài viết</h2>
     </div>
-
-    <form  asp-action="Create" method="post">
+    <!--Begin Form-->
+    <form asp-action="Create" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="MenuID">Chọn mục</label>
-                <select asp-for="MenuID" class="form-control" asp-items="@(new SelectList(ViewBag.mnList,"Value", "Text"))"></select>
+                <select asp-for="MenuID" class="form-control" asp-items="@(new SelectList(ViewBag.postList,"Value", "Text"))"></select>
                 <span asp-validation-for="MenuID" class="alert-danger"></span>
             </div>
         
@@ -76,8 +76,8 @@
         <button type="submit" class="btn btn-lg btn-danger p-2">
             <i class="bi bi-trash-fill">Lưu lại</i>
          </button>
-
     </form>
+    <!--End Form-->
 </main>
 @{
     var summerNote = new startup.Areas.Admin.Models.SummerNote("#Contents");

@@ -13,7 +13,7 @@ namespace startup.Areas.Admin.Controllers
             _context = context;
         }
 
-        //lấy các danh sách menu từ database và truyền dữ liệu qua file index.cshtml của thư mục menu
+        //lấy các danh sách menu từ database và truyền dữ liệu qua file index.cshtml của thư mục Menu
         public IActionResult Index()
         {
             var mnList = _context.Menus.OrderBy(m => m.MenuID).ToList();
@@ -50,7 +50,7 @@ namespace startup.Areas.Admin.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(mn);
         }
 
         // Hiển thị trang chỉnh sửa 1 menu
